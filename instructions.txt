@@ -1,0 +1,56 @@
+STEP 7: BUILD & RUN CONTAINERS
+---------------------------
+# Build images and start containers
+docker compose up --build
+
+---------------------------
+STEP 8: TEST APPLICATION
+---------------------------
+# Open browser
+http://localhost:5000
+
+# Add data (example using curl)
+curl -X POST http://localhost:5000/add \
+-H "Content-Type: application/json" \
+-d "{\"name\":\"User1\",\"role\":\"Engineer\"}"
+
+# Fetch data
+curl http://localhost:5000/users
+
+---------------------------
+STEP 9: STOP CONTAINERS
+---------------------------
+# Stop and remove containers (data remains)
+docker compose down
+
+---------------------------
+STEP 10: VERIFY DATA PERSISTENCE
+---------------------------
+# Start again
+docker compose up
+
+# Data is still present because of Docker Volume
+
+---------------------------
+STEP 11: DOCKER VOLUME COMMANDS
+---------------------------
+# List volumes
+docker volume ls
+
+# Inspect volume
+docker volume inspect mongo_data
+
+# WARNING: This deletes data permanently
+docker compose down -v
+
+---------------------------
+STEP 12: IMPORTANT CONCEPTS
+---------------------------
+# Flask container is STATELESS
+# MongoDB container is STATEFUL
+# Docker Volume stores database data
+# Docker Compose manages multiple containers
+
+---------------------------
+END OF DOCKER WORKFLOW
+---------------------------
